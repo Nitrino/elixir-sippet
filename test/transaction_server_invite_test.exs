@@ -67,7 +67,7 @@ defmodule Sippet.Transactions.Server.Invite.Test do
       # automatically
       assert action_timeout(actions, 200)
 
-      assert called(Sippet.Router.to_core(:sippet, :receive_request, [request, transaction]))
+      assert called(Sippet.Router.to_core(:sippet, :receive_request, [request, transaction, :_]))
 
       # case another request is sent before this 200ms timer, then no response
       # is sent

@@ -56,13 +56,13 @@ defmodule Sippet.Transactions.Server.NonInvite.Test do
       # the core will have up to 4 seconds to answer the incoming request
       :keep_state_and_data = NonInvite.trying(:enter, :none, data)
 
-      assert called(Sippet.Router.to_core(:sippet, :receive_request, [request, transaction]))
+      assert called(Sippet.Router.to_core(:sippet, :receive_request, [request, transaction, :_]))
     end
 
     ## error conditions are timeout and network errors
     with_mock Sippet.Router, to_core: fn _, _, _ -> :ok end do
       {:stop, :shutdown, _data} = NonInvite.trying(:cast, {:error, :uh_oh}, data)
-      assert called(Sippet.Router.to_core(:sippet, :receive_error, [:uh_oh, transaction]))
+      assert called(Sippet.Router.to_core(:sippet, :receive_error, [:uh_oh, transaction, :_]))
     end
 
     # while in trying state, there's no answer, so no retransmission is made

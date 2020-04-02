@@ -32,13 +32,13 @@ defmodule Sippet.Transactions.Client do
       defp send_request(request, %State{key: key, sippet: sippet} = data),
         do: Sippet.Router.send_transport_message(sippet, request, key)
 
-      defp receive_response(response, %State{key: key, sippet: sippet} = data),
-        do: Sippet.Router.to_core(sippet, :receive_response, [response, key])
+      defp receive_response(response, %State{key: key, sippet: sippet, request: request}),
+        do: Sippet.Router.to_core(sippet, :receive_response, [response, key, request])
 
-      def shutdown(reason, %State{key: key, sippet: sippet} = data) do
+      def shutdown(reason, %State{key: key, sippet: sippet, request: request} = data) do
         Logger.warn("client transaction #{inspect(key)} shutdown: #{reason}")
 
-        Sippet.Router.to_core(sippet, :receive_error, [reason, key])
+        Sippet.Router.to_core(sippet, :receive_error, [reason, key, request])
 
         {:stop, :shutdown, data}
       end

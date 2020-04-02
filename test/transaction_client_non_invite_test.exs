@@ -94,7 +94,7 @@ defmodule Sippet.Transactions.Client.NonInvite.Test do
       # to core
       {:stop, :shutdown, _data} = NonInvite.trying(:info, :deadline, data)
 
-      assert called(Sippet.Router.to_core(:sippet, :receive_error, [:timeout, transaction]))
+      assert called(Sippet.Router.to_core(:sippet, :receive_error, [:timeout, transaction, :_]))
 
       # in the transition to the proceeding state, the timers aren't stopped
       last_response = Message.to_response(request, 100)

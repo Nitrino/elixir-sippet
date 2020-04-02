@@ -62,23 +62,23 @@ defmodule Sippet.Core do
       @behaviour Sippet.Core
 
       @doc false
-      def receive_request(_incoming_request, _server_key) do
-        raise "attempted to call Core but no receive_request/2 was provided"
+      def receive_request(_incoming_request, _server_key, _initial_request) do
+        raise "attempted to call Core but no receive_request/3 was provided"
       end
 
       @doc false
-      def receive_response(incoming_response, client_key) do
-        raise "attempted to call Core but no receive_response/2 was provided"
+      def receive_response(_incoming_response, _client_key, _initial_request) do
+        raise "attempted to call Core but no receive_response/3 was provided"
       end
 
       @doc false
-      def receive_error(reason, client_or_server_key) do
-        raise "attempted to call Core but no receive_error/2 was provided"
+      def receive_error(_reason, _client_or_server_key, _initial_request) do
+        raise "attempted to call Core but no receive_error/3 was provided"
       end
 
-      defoverridable receive_request: 2,
-                     receive_response: 2,
-                     receive_error: 2
+      defoverridable receive_request: 3,
+                     receive_response: 3,
+                     receive_error: 3
     end
   end
 end
