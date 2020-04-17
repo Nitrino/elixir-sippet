@@ -9,7 +9,7 @@ defmodule Sippet.Transactions.Client.Invite do
 
   # optimization: transaction ends in 37.8s
   @timer_a 600
-  @timer_b 64 * @timer_a
+  @timer_b Application.get_env(:sippet, :timer_b) || 64 * @timer_a
   # timer D should be > 32s
   @timer_d 32_000
 
