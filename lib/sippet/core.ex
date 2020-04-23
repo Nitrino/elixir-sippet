@@ -32,7 +32,7 @@ defmodule Sippet.Core do
   The `client_key` indicates the name of the transaction created when
   the request was sent using `Sippet.Transactions.send_request/1`.
 
-  The function `receive_response/2` is called from the client transaction
+  The function `receive_response/3` is called from the client transaction
   process when the parameter `client_key` is not `nil`, and from the
   transport process (possibly a `poolboy` worker process), when the
   `client_key` is `nil`.

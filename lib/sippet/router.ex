@@ -209,7 +209,7 @@ defmodule Sippet.Router do
         # Redirect the response to core. These are tipically retransmissions of
         # 200 OK for sent INVITE requests, and they have to be handled directly
         # by the core in order to catch the correct media handling.
-        to_core(sippet, :receive_response, [incoming_response, nil])
+        to_core(sippet, :receive_response, [incoming_response, nil, nil])
 
       [{pid, _}] ->
         # Redirect the response to the existing client transaction. If needed,
